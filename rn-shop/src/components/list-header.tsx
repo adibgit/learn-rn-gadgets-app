@@ -103,6 +103,10 @@ export const ListHeader = () => {
 
   const { getItemCount } = useCartStore()
 
+  const handleSignOut = async () => {
+    await supabase.auth.signOut()
+  }
+
   return (
     <View style={[styles.headerContainer]}>
       <View style={styles.headerTop}>
@@ -110,7 +114,7 @@ export const ListHeader = () => {
         {/* header-left profile icon */}
         <View style={styles.headerLeft}>
           <View style={styles.avatarContainer}>
-            <Image 
+            <Image
               source={{ uri: 'https://via.placeholder.com/40' }}
               style={styles.avatarImage}
             />
@@ -131,7 +135,6 @@ export const ListHeader = () => {
                   color='gray'
                   style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
                   />
-
                 <View style={styles.badgeContainer}>
                   <Text style={styles.badgeText}>
                     {getItemCount()}
@@ -141,6 +144,13 @@ export const ListHeader = () => {
             )}
           </Pressable>
         </Link>
+
+        <TouchableOpacity
+            onPress={handleSignOut}
+            style={styles.signOutButton}
+          >
+            <FontAwesome name='sign-out' size={25} color='red' />
+        </TouchableOpacity>
 
       </View>
 
